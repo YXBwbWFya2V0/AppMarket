@@ -59,6 +59,7 @@ import com.app.market.ui.component.FloatingBottomBarItem
 import com.app.market.ui.component.blur.BlurredBar
 import com.app.market.ui.component.blur.rememberBlurBackdrop
 import com.app.market.ui.screen.SearchTab
+import com.app.market.ui.screen.FdroidTab
 import com.app.market.ui.screen.SettingsTab
 import com.app.market.ui.screen.TodayTab
 import com.app.market.ui.screen.UpdatesTab
@@ -94,11 +95,12 @@ import top.yukonga.miuix.kmp.icon.extended.Create
 import top.yukonga.miuix.kmp.icon.extended.Search
 import top.yukonga.miuix.kmp.icon.extended.Settings
 import top.yukonga.miuix.kmp.icon.extended.Update
+import top.yukonga.miuix.kmp.icon.extended.More
 import top.yukonga.miuix.kmp.theme.MiuixTheme
 import kotlin.math.abs
 
 // 主页签集合按平台能力裁剪：桌面端（无法扫描已装应用 / 安装）不含「更新」。
-private enum class MainTab { Today, Updates, Search, Settings }
+private enum class MainTab { Today, Updates, Search, Fdroid, Settings }
 
 @Composable
 fun MainPage(
@@ -116,13 +118,15 @@ fun MainPage(
     val enableFloatingBottomBar = LocalEnableFloatingBottomBar.current
     val enableFloatingBottomBarBlur = LocalEnableFloatingBottomBarBlur.current
     val updatesState by updatesViewModel.uiState.collectAsStateWithLifecycle()
+    val fdroidEnabled by themePreferences.fdroidEnabled.collectAsStateWithLifecycle()
     val appManagementSupported = uiPlatform.packageInstallationSupported
-    val tabs = remember(appManagementSupported) {
+    val tabs = remember(appManagementSupported, fdroidEnabled) {
         buildList {
             add(MainTab.Today)
             if (appManagementSupported) add(MainTab.Updates)
             add(MainTab.Search)
             add(MainTab.Settings)
+            if (fdroidEnabled) add(MainTab.Fdroid)
         }
     }
     val searchPage = tabs.indexOf(MainTab.Search)
@@ -220,6 +224,8 @@ fun MainPage(
                     focusRequestId = searchFocusRequestId,
                 )
 
+                MainTab.Fdroid -> FdroidTab(bottomPadding = bottomPadding)
+
                 MainTab.Settings -> SettingsTab(
                     updatesViewModel = updatesViewModel,
                     installerSettingsViewModel = installerSettingsViewModel,
@@ -234,6 +240,7 @@ fun MainPage(
                     onNavigateDownloadingApps = { navigator.push(Route.DownloadingApps) },
                     onNavigateAbout = { navigator.push(Route.About) },
                     onNavigateTheme = { navigator.push(Route.ThemeSettings) },
+                    onNavigateFdroid = { navigator.push(Route.FdroidRepositories) },
                 )
             }
         }
@@ -392,6 +399,7 @@ private val MainTab.icon
         MainTab.Today -> MiuixIcons.Create
         MainTab.Updates -> MiuixIcons.Update
         MainTab.Search -> MiuixIcons.Search
+        MainTab.Fdroid -> MiuixIcons.More
         MainTab.Settings -> MiuixIcons.Settings
     }
 
@@ -400,6 +408,7 @@ private val MainTab.labelRes
         MainTab.Today -> Res.string.nav_today
         MainTab.Updates -> Res.string.nav_updates
         MainTab.Search -> Res.string.nav_search
+        MainTab.Fdroid -> Res.string.nav_fdroid
         MainTab.Settings -> Res.string.nav_settings
     }
 

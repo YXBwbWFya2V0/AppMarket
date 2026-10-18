@@ -28,6 +28,8 @@ import com.app.market.resources.filter_reservation_apps
 import com.app.market.resources.filter_reservation_apps_summary
 import com.app.market.resources.focus_notification_optimization
 import com.app.market.resources.general
+import com.app.market.resources.fdroid_repositories
+import com.app.market.resources.fdroid_repositories_summary
 import com.app.market.resources.home_page
 import com.app.market.resources.home_page_summary
 import com.app.market.resources.ignored_apps
@@ -100,6 +102,7 @@ fun SettingsTab(
     onNavigateDownloadingApps: () -> Unit,
     onNavigateAbout: () -> Unit,
     onNavigateTheme: () -> Unit,
+    onNavigateFdroid: () -> Unit,
 ) {
     val updatesState by updatesViewModel.uiState.collectAsStateWithLifecycle()
     val installerState by installerSettingsViewModel.uiState.collectAsStateWithLifecycle()
@@ -339,6 +342,11 @@ fun SettingsTab(
                         title = stringResource(Res.string.theme),
                         summary = stringResource(Res.string.theme_summary),
                         onClick = onNavigateTheme,
+                    )
+                    ArrowPreference(
+                        title = stringResource(Res.string.fdroid_repositories),
+                        summary = stringResource(Res.string.fdroid_repositories_summary),
+                        onClick = onNavigateFdroid,
                     )
                     ArrowPreference(
                         title = stringResource(Res.string.about),

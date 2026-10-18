@@ -5,6 +5,7 @@
     <string name="nav_updates">更新</string>
     <string name="nav_search">搜索</string>
     <string name="nav_settings">设置</string>
+    <string name="nav_fdroid">F-Droid</string>
     <string name="nav_today">今日</string>
 
     <!-- Common -->
@@ -74,6 +75,15 @@
 
     <!-- Settings -->
     <string name="settings">设置</string>
+    <string name="fdroid_repositories">F-Droid 仓库</string>
+    <string name="fdroid_repositories_summary">开启 F-Droid 底栏标签并选择仓库源</string>
+    <string name="fdroid_enabled">开启 F-Droid 库</string>
+    <string name="fdroid_enabled_summary">在底栏显示 F-Droid</string>
+    <string name="fdroid_source">选择源</string>
+    <string name="fdroid_official">官方源</string>
+    <string name="fdroid_official_summary">F-Droid 官方应用仓库</string>
+    <string name="fdroid_tuna">清华 TUNA 镜像源</string>
+    <string name="fdroid_tuna_summary">使用 F-Droid 官方仓库的清华 TUNA 镜像</string>
     <string name="general">通用</string>
     <string name="theme">主题</string>
     <string name="theme_summary">外观与导航行为</string>

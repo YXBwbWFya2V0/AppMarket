@@ -22,6 +22,7 @@ import com.app.market.ui.screen.InstallerSettingsScreen
 import com.app.market.ui.screen.ManualUpdateScreen
 import com.app.market.ui.screen.SavedPackagesScreen
 import com.app.market.ui.screen.ThemeSettingsScreen
+import com.app.market.ui.screen.FdroidRepositoriesScreen
 import com.app.market.ui.screen.TodayArticleScreen
 import com.app.market.ui.screen.UpdateHistoryScreen
 import com.app.market.viewmodel.AppDetailViewModel
@@ -265,6 +266,10 @@ fun AppNavigation(
             entry<Route.ThemeSettings>(swipeDismiss = swipeBackDirection) {
                 val vm = koinViewModel<ThemeSettingsViewModel>()
                 ThemeSettingsScreen(vm, onBack = { navigator.pop() })
+            }
+            entry<Route.FdroidRepositories>(swipeDismiss = swipeBackDirection) {
+                val vm = koinViewModel<ThemeSettingsViewModel>()
+                FdroidRepositoriesScreen(vm, onBack = { navigator.pop() })
             }
         }
     }

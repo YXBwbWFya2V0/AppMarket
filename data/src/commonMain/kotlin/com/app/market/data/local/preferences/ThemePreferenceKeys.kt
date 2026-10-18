@@ -9,6 +9,8 @@ object ThemePreferenceKeys {
     val EnableFloatingBottomBar = BooleanPreferenceKey(NS, "enable_floating_bottom_bar")
     val EnableFloatingBottomBarBlur = BooleanPreferenceKey(NS, "enable_floating_bottom_bar_blur")
     val EnableNavigationBadge = BooleanPreferenceKey(NS, "enable_navigation_badge", true)
+    val FdroidEnabled = BooleanPreferenceKey(NS, "fdroid_enabled")
+    val FdroidSource = StringPreferenceKey(NS, "fdroid_source")
     val NavRailExpanded = BooleanPreferenceKey(NS, "nav_rail_expanded")
     val EnablePredictiveBack = BooleanPreferenceKey(NS, "enable_predictive_back")
     val PageScale = StringPreferenceKey(NS, "page_scale")

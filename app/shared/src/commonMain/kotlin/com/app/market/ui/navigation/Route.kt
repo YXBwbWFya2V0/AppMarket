@@ -54,4 +54,7 @@ sealed interface Route : NavKey {
 
     @Serializable
     data object ThemeSettings : Route
+
+    @Serializable
+    data object FdroidRepositories : Route
 }

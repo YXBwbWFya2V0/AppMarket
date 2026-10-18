@@ -29,6 +29,10 @@ internal class ThemePreferencesRepositoryImpl(
     override val enableFloatingBottomBarBlur: StateFlow<Boolean> = _enableFloatingBottomBarBlur.asStateFlow()
     private val _enableNavigationBadge = MutableStateFlow(ThemePreferenceKeys.EnableNavigationBadge.default)
     override val enableNavigationBadge: StateFlow<Boolean> = _enableNavigationBadge.asStateFlow()
+    private val _fdroidEnabled = MutableStateFlow(false)
+    override val fdroidEnabled: StateFlow<Boolean> = _fdroidEnabled.asStateFlow()
+    private val _fdroidSource = MutableStateFlow("official")
+    override val fdroidSource: StateFlow<String> = _fdroidSource.asStateFlow()
     private val _navRailExpanded = MutableStateFlow(ThemePreferenceKeys.NavRailExpanded.default)
     override val navRailExpanded: StateFlow<Boolean> = _navRailExpanded.asStateFlow()
     private val _enablePredictiveBack = MutableStateFlow(false)
@@ -48,6 +52,8 @@ internal class ThemePreferencesRepositoryImpl(
             observe("enableNavigationBadge", preferences.observe(ThemePreferenceKeys.EnableNavigationBadge)) {
                 _enableNavigationBadge.value = it
             },
+            observe("fdroidEnabled", preferences.observe(ThemePreferenceKeys.FdroidEnabled)) { _fdroidEnabled.value = it },
+            observe("fdroidSource", preferences.observe(ThemePreferenceKeys.FdroidSource)) { _fdroidSource.value = it ?: "official" },
             observe("navRailExpanded", preferences.observe(ThemePreferenceKeys.NavRailExpanded)) {
                 _navRailExpanded.value = it
             },
@@ -94,6 +100,8 @@ internal class ThemePreferencesRepositoryImpl(
         preferences.put(ThemePreferenceKeys.EnableFloatingBottomBarBlur, value)
 
     override suspend fun setEnableNavigationBadge(value: Boolean) = preferences.put(ThemePreferenceKeys.EnableNavigationBadge, value)
+    override suspend fun setFdroidEnabled(value: Boolean) = preferences.put(ThemePreferenceKeys.FdroidEnabled, value)
+    override suspend fun setFdroidSource(value: String) = preferences.put(ThemePreferenceKeys.FdroidSource, value)
     override suspend fun setNavRailExpanded(value: Boolean) = preferences.put(ThemePreferenceKeys.NavRailExpanded, value)
     override suspend fun setEnablePredictiveBack(value: Boolean) {
         platformPreferences.setPredictiveBackEnabled(value)
